@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Daily Spark ✨</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f0f8ff; transition: background-color 0.5s; }
+        h1 { color: #ff69b4; font-size: 2.5em; }
+        p { font-size: 1.5em; color: #333; margin-top: 30px; line-height: 1.6; }
+        .birthday { background-color: #fff0f5 !important; } /* Soft pink for birthday */
+        .festival { background-color: #fffacd; } /* Light yellow for festivals */
+    </style>
+</head>
+<body>
+    <h1>Here's Your Daily Spark! ✨</h1>
+    <p id="message">Loading your special message...</p>
+
+    <script>
+        // Special dates: Birthday (every year) + Major Hindu festivals (approximate for 2026 and nearby years)
+        const specialDates = {
+            // Her Birthday - January 5 every year (highest priority)
+            '01-05': { type: 'birthday', message: '🎉 Happy Birthday, my love! 🎂🎈\nToday is YOUR day—may it be filled with endless joy, laughter, surprises, and all the love in the world. You deserve the best year ever. I love you so much! 💖🥳' },
+
+            // Major Hindu Festivals (dates based on reliable 2026 calendars; most are stable or shift minimally)
+            '01-14': { type: 'festival', message: 'Happy Makar Sankranti / Pongal! May the sun bring you warmth, prosperity, and new beginnings. Have a sweet and joyful day!' },
+            '01-23': { type: 'festival', message: 'Happy Vasant Panchami! Let knowledge and creativity bloom in your life like spring flowers. Shine bright today!' },
+            '02-15': { type: 'festival', message: 'Happy Maha Shivaratri! Find peace, strength, and transformation. Wishing you a powerful and serene day!' },
+            '03-03': { type: 'festival', message: 'Happy Holika Dahan! Let go of negativity and welcome positivity with open arms.' },
+            '03-04': { type: 'festival', message: 'Happy Holi! Play with colors of joy, love, and happiness. Have a vibrant day!' },
+            '03-19': { type: 'festival', message: 'Happy Ugadi / Gudi Padwa! New year, new hopes—embrace fresh beginnings!' },
+            '03-27': { type: 'festival', message: 'Happy Ramanavami! Draw courage and goodness into your day.' },
+            '04-02': { type: 'festival', message: 'Happy Hanuman Jayanti! Strength and devotion will help you conquer anything!' },
+            '04-14': { type: 'festival', message: 'Happy Baisakhi / Vishu! Celebrate renewal and abundance.' },
+            '08-26': { type: 'festival', message: 'Happy Onam! Prosperity and togetherness fill your day!' },
+            '08-28': { type: 'festival', message: 'Happy Raksha Bandhan! Feel the protection and love of those who care.' },
+            '09-04': { type: 'festival', message: 'Happy Krishna Janmashtami! Let playfulness and wisdom guide you.' },
+            '09-14': { type: 'festival', message: 'Happy Ganesh Chaturthi! Remove obstacles and welcome success!' },
+            '10-20': { type: 'festival', message: 'Happy Dussehra! Good triumphs—celebrate your inner strength!' },
+            '11-08': { type: 'festival', message: 'Happy Diwali! Lights of joy and prosperity illuminate your world!' },
+            '11-11': { type: 'festival', message: 'Happy Bhai Dooj! Bonds of love and support surround you.' }
+        };
+
+        // General daily motivational messages (random if no special date)
+        const generalMessages = [
+            'Have a wonderful day! You make the world brighter just by being you. 🌟',
+            'Smile big today—good things are coming your way! 😊',
+            'You are strong, capable, and loved. Conquer the day! 💪❤️',
+            'Enjoy every moment—life is beautiful with you in it. 🌸',
+            'Believe in yourself—you\'ve got this! ✨',
+            'Spread kindness today—it always comes back. 💕',
+            'Take a deep breath and shine—you deserve happiness! 🌅',
+            'Today is full of possibilities. Make it amazing! 🚀',
+            'You are treasured. Have a peaceful and joyful day. 🕊️',
+            'Keep going—you inspire everyone around you! 🌟'
+        ];
+
+        // Get today's date
+        const today = new Date();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        const dateKey = `${month}-${day}`;
+
+        let message = '';
+        let pageClass = '';
+
+        const special = specialDates[dateKey];
+        if (special) {
+            if (special.type === 'birthday') {
+                message = special.message;
+                pageClass = 'birthday';
+            } else {
+                message = special.message;
+                pageClass = 'festival';
+            }
+        } else {
+            const randomIndex = Math.floor(Math.random() * generalMessages.length);
+            message = generalMessages[randomIndex];
+        }
+
+        // Show the message
+        document.getElementById('message').textContent = message;
+        if (pageClass) document.body.classList.add(pageClass);
+    </script>
+</body>
+</html>
